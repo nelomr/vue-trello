@@ -1,0 +1,23 @@
+@import "../../../node_modules/breakpoint-sass/stylesheets/breakpoint";
+
+/* breakpoints */
+
+$min-tablet: min-width 480px;
+$min-desktop: min-width 768px;
+$min-desktop-xlarge: min-width 1280px;
+$min-desktop-xxlarge: min-width 1440px;
+
+/* colors */
+
+$line-color: blue;
+$secondary-color: #0c6d72e2;
+$line-width: 6px;
+$label-height: 2em;
+$label-color-active: rgb(224, 159, 102);
+$label-color-inactive: #99A4AC;
+$light-color: #FFFFFF;
+$grey-color: #DDDDDD;
+$grey-light-color: #EFEFEF;
+$grey-medium: #C7C7C7;
+$background-color: #F6F6F6;
+$text-color: #75777A;
