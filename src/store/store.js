@@ -17,6 +17,10 @@ export default new Vuex.Store({
         setDescriptionTask({commit, getters}, {description, id}) {
             const task = getters.getTask(id);
             commit('changeDescription', {description, task})
+        },
+        setTitleTask({commit, getters}, {title, id}) {
+            const task = getters.getTask(id);
+            commit('changeTitle', {title, task})
         }
     },
     getters: {
@@ -36,10 +40,13 @@ export default new Vuex.Store({
         changeDescription(state, {description, task}) {
             task.description = description;
         },
-        addTask(state, {tasks, name, description}) {
+        changeTitle(state, {title, task}) {
+            task.name = title;
+        },
+        addTask(state, {tasks, name}) {
             tasks.push(
                 {
-                    description: description.length > 0 || 'Some description...',
+                    description: '',
                     name: name,
                     id: Math.floor(Math.random() * Date.now()),
                     user: null

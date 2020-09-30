@@ -16,3 +16,20 @@ body {
     height: 100%;
   }
 }
+
+input[type=text],
+textarea {
+    width: 100%;
+    min-height: 40px;
+    color: $dark-color;
+    background-color: $light-color;
+    border: none;
+    background-color: $light-color;
+    appearance: none;
+    resize: none;
+    outline: none;
+}
+
+textarea {
+    min-height: 100%;
+}

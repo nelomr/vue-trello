@@ -2,14 +2,18 @@
     <div class="column">
         <div class="column--content">
             <div>{{ list.name }}</div>
-            <draggable v-model="tasks" tag="ul" group="all-users" ghost-class="moving-card" :animation="200" @start="drag=true" @end="drag=false">
-                <CardBoard 
-                    v-for="element in tasks"
-                    :key="element.id"
-                    :task="element"
-                />
-            </draggable>
-            <button @click="openPopup()">Add new task <font-awesome-icon icon="plus" size="1x" /></button>
+            <div class="column--wrapper">
+                <draggable v-model="tasks" tag="ul" group="all-users" ghost-class="moving-card" :animation="200" @start="drag=true" @end="drag=false">
+                    <CardBoard 
+                        v-for="element in tasks"
+                        :key="element.id"
+                        :task="element"
+                    />
+                </draggable>
+            </div>
+            <!-- <button @click="openPopup()">Add new task <font-awesome-icon icon="plus" size="1x" /></button> -->
+            <input class="column--add" type="text" v-model="name" placeholder="+ Add new task" @keyup.enter="addTask(name)">
+            <button class="column--button" v-show="name.length > 0" @click="addTask(name)">Add <font-awesome-icon icon="plus" size="1x" /></button>
         </div>
         <PopupElement
             :statePopup="popupOpen"
@@ -43,6 +47,7 @@ export default {
     data() {
         return {
             tasks: this.list.tasks,
+            name: '',
             popupOpen: false
         }
     },
@@ -52,6 +57,10 @@ export default {
         },
         openPopup() {
             this.popupOpen = true;
+        },
+        addTask(name) {
+            this.name.length > 0 && this.$store.commit('addTask',{tasks: this.tasks, name: name});
+            this.name = '';
         }
     }
 }
@@ -83,6 +92,21 @@ export default {
 
         ul {
             padding: 0;
+            margin-bottom: 0;
         }
+    }
+
+    .column--content {
+        padding: 10px;
+        background-color: $grey-light-color;
+    }
+
+    .column--wrapper {
+        max-height: 800px;
+        overflow: auto;
+    }
+
+    input[type=text].column--add {
+        background-color: transparent;
     }
 </style>

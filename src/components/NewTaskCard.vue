@@ -62,21 +62,6 @@ export default {
             font-weight: bold;
             text-align: left;
         }
-
-        input[type=text],
-        textarea {
-            width: 100%;
-            min-height: 40px;
-            color: $dark-color;
-            background-color: $light-color;
-            border: 1px solid $grey-medium-color;
-            appearance: none;
-            resize: none;
-        }
-
-        textarea {
-            min-height: 100px;
-        }
     }
 
     .new-task-card--buttons {

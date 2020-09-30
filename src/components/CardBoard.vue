@@ -1,12 +1,22 @@
 <template>
     <li class="card-board">
-        <div class="card-board--title">{{ title }}</div>
+        <div class="card-board--title">
+            <input
+                @input="changeTitle()"
+                type="text"
+                v-model="title"
+            >
+        </div>
         <div class="card-board--content">
             <div class="card-board--description">
-                <textarea @input="changeDescription()" v-show="enableEdit" resize="false" v-model="description" type="text" :disabled="!enableEdit" />
-                <div v-show="!enableEdit" v-html="description" @click.prevent="addDescription()"></div>
+                <textarea
+                    @input="changeDescription()"
+                    resize="false"
+                    v-model="description"
+                    placeholder="Add some description..."
+                    type="text"
+                />
                 <div class="card-board--buttons">
-                    <a href="#" @click.prevent="addDescription()"><font-awesome-icon icon="edit" size="1x" /></a>
                     <a href="#" @click.prevent="'#'"><font-awesome-icon icon="trash-alt" size="1x" /></a>
                 </div>
             </div>
@@ -44,6 +54,9 @@ export default {
         },
         changeDescription() {
             this.$store.dispatch('setDescriptionTask', {description: this.description, id: this.task.id});
+        },
+        changeTitle() {
+            this.$store.dispatch('setTitleTask', {title: this.title, id: this.task.id});
         }
     }
 }
@@ -58,6 +71,15 @@ export default {
         border-color: $light-color;
         border-radius: .5em;
         box-shadow: 0 1px 3px 0 rgba(0,0,0,.1), 0 1px 2px 0 rgba(0,0,0,.06);
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    .card-board--title input {
+        font-size: 16px;
+        font-weight: bold;
     }
 
     .card-board--buttons {
