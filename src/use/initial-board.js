@@ -8,13 +8,13 @@ export default {
             description: '',
             name: 'first task',
             id: 1,
-            userAssigned: null
+            user: null
           },
           {
             description: '',
             name: 'second task',
             id: 2,
-            userAssigned: null
+            user: null
           },
         ]
       },
@@ -25,7 +25,7 @@ export default {
             description: '',
             name: 'last task',
             id: 3,
-            userAssigned: null
+            user: null
           }
         ]
       }
