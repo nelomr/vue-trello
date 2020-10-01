@@ -2,7 +2,7 @@
   <div id="app">
     <header>Drello</header>
     <div class="list-columns" v-if="list">
-      <ColumnBoard v-for="(column, index) in list" :key="'column'+index" :list="column" />
+      <ColumnBoard v-for="(column, indexColumn) in list" :key="'column'+indexColumn" :indexColumn="indexColumn" />
     </div>
   </div>
 </template>

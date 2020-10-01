@@ -1,13 +1,20 @@
 <template>
-    <div class="column">
+    <div class="column" v-if="list">
         <div class="column--content">
             <div>{{ list.name }}</div>
             <div class="column--wrapper">
-                <draggable v-model="tasks" tag="ul" group="all-users" ghost-class="moving-card" :animation="200" @start="drag=true" @end="drag=false">
+                <draggable
+                    v-model="list.tasks"
+                    tag="ul"
+                    group="tasks"
+                    ghost-class="moving-card"
+                    :animation="200"
+                     @start="drag=true"
+                     @end="update()">
                     <CardBoard 
-                        v-for="element in tasks"
-                        :key="element.id"
-                        :task="element"
+                        v-for="task in list.tasks"
+                        :key="task.id"
+                        :task="task"
                     />
                 </draggable>
             </div>
@@ -15,52 +22,54 @@
             <input class="column--add" type="text" v-model="name" placeholder="+ Add new task" @keyup.enter="addTask(name)">
             <button class="column--button" v-show="name.length > 0" @click="addTask(name)">Add <font-awesome-icon icon="plus" size="1x" /></button>
         </div>
-        <PopupElement
-            :statePopup="popupOpen"
-            @closePopup="closePopup()"
-        />
     </div>
 </template>
 
 <script>
 import CardBoard from './CardBoard';
 import Draggable from "vuedraggable";
-import PopupElement from './PopupElement';
+import { mapState } from 'vuex';
 
 export default {
+    name:'columnBoard',
     components: {
         CardBoard,
-        Draggable,
-        PopupElement
+        Draggable
     },
     props: {
-        list: {
-            type: Object,
-            default: () => ({})
+        indexColumn: {
+            type: Number,
+            default: 0
         }
     },
     provide() {
         return {
-            tasks: this.tasks
+            tasks: this.list.tasks
         };
     },
     data() {
         return {
-            tasks: this.list.tasks,
             name: '',
-            popupOpen: false
+        }
+    },
+    computed: {
+        ...mapState(['board']),
+        list: {
+            get() {
+                return this.board.columns[this.indexColumn]
+            },
+            set(value) {
+                this.$store.commit('updateColumnsData', {tasks: value, indexColumn: this.indexColumn})
+            }
         }
     },
     methods: {
-        closePopup() {
-            this.popupOpen = false;
-        },
-        openPopup() {
-            this.popupOpen = true;
-        },
         addTask(name) {
-            this.name.length > 0 && this.$store.commit('addTask',{tasks: this.tasks, name: name});
+            this.name.length > 0 && this.$store.commit('addTask',{tasks: this.list.tasks, name: name});
             this.name = '';
+        },
+        update() {
+           this.$store.commit('updateColumnsData', {tasks: this.list.tasks, indexColumn: this.indexColumn})
         }
     }
 }

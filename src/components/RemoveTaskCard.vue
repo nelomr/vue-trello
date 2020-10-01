@@ -1,18 +1,11 @@
 <template>
     <div class="new-task-card">
         <div class="new-task-card--content">
-            <div class="new-task-card--field">
-                <label for="name">Task Name</label>
-                <input type="text" name="name" v-model="name">
-            </div>
-            <div class="new-task-card--field">
-                <label for="name">Description</label>
-                <textarea v-model="description" />
-            </div>
+           <h2>Are you sure?</h2>
         </div>
         <div class="new-task-card--buttons">
-            <a @click.prevent="resetTask()" href="#">Cancel</a>
-            <a @click.prevent="addTask()" href="#">Add</a>
+            <a @click.prevent="closePopup()" href="#">Cancel</a>
+            <a @click.prevent="removeTask()" href="#">Yes</a>
         </div>
     </div>
 </template>
@@ -27,21 +20,14 @@ export default {
         }
     },
     methods: {
-        addTask() {
-            this.name.length > 0 && this.$store.commit('addTask',{
+        removeTask() {
+            this.$store.commit('removeTask',{
                 tasks: this.tasks,
-                name: this.name,
-                description: this.description
-                });
-            this.resetTask();
+                indexTask: 1,
+            });
         },
         closePopup() {
             this.$emit('closePopup');
-        },
-        resetTask() {
-            this.name = '';
-            this.description = '';
-            this.closePopup()
         }
     }
 }

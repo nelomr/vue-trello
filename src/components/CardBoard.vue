@@ -17,17 +17,25 @@
                     type="text"
                 />
                 <div class="card-board--buttons">
-                    <a href="#" @click.prevent="'#'"><font-awesome-icon icon="trash-alt" size="1x" /></a>
+                    <a href="#" @click.prevent="openPopup()"><font-awesome-icon icon="trash-alt" size="1x" /></a>
                 </div>
             </div>
         </div>
+        <PopupElement
+            :statePopup="popupOpen"
+            @closePopup="closePopup()"
+        />
     </li>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import PopupElement from './PopupElement';
+
 export default {
+    name:'cardBoard',
     components: {
+        PopupElement
     },
     props: {
         task: {
@@ -37,6 +45,7 @@ export default {
     },
     data() {
         return {
+            popupOpen: false,
             enableEdit: false,
             title: this.task.name,
             description: this.task.description
@@ -57,6 +66,12 @@ export default {
         },
         changeTitle() {
             this.$store.dispatch('setTitleTask', {title: this.title, id: this.task.id});
+        },
+        openPopup() {
+            this.popupOpen = true;
+        },
+        closePopup() {
+            this.popupOpen = false;
         }
     }
 }

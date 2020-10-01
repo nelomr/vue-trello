@@ -52,6 +52,12 @@ export default new Vuex.Store({
                     user: null
                 }
             );
+        },
+        removeTask(state, {tasks, indexTask}) {
+            tasks.slice(indexTask, 1);
+        },
+        updateColumnsData(state, {tasks, indexColumn}) {
+            state.board.columns[indexColumn].tasks = tasks;
         }
     }
 })

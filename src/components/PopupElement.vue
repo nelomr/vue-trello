@@ -2,14 +2,15 @@
     <div class="popup" :class="{'is-visible': popupState}">
         <div class="popup--overlay" @click="closePopup()"></div>
         <div class="popup--container">
-            <NewTask @closePopup="closePopup()" />
+            <RemoveTask @closePopup="closePopup()" />
         </div>
     </div>
 </template>
 
 <script>
-import NewTask from './NewTaskCard';
+import RemoveTask from './RemoveTaskCard';
 export default {
+    name:'popupElement',
     props: {
         statePopup: {
             type: Boolean,
@@ -17,7 +18,7 @@ export default {
         }
     },
     components: {
-        NewTask
+        RemoveTask
     },
     computed: {
         popupState() {
