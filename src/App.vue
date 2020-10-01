@@ -1,10 +1,14 @@
 <template>
-  <div id="app">
-    <header>Drello</header>
-    <div class="list-columns" v-if="list">
-      <ColumnBoard v-for="(column, indexColumn) in list" :key="'column'+indexColumn" :indexColumn="indexColumn" />
+    <div id="app">
+        <header>Drello</header>
+        <div class="list-columns" v-if="list">
+            <ColumnBoard
+                v-for="(column, indexColumn) in list"
+                :key="'column'+indexColumn"
+                :indexColumn="indexColumn"
+            />
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
@@ -13,26 +17,26 @@ import ColumnBoard from './components/ColumnBoard';
 
 
 export default {
-  name: 'Drello',
-  components: {
-    ColumnBoard
-  },
-  computed: {
-    ...mapState(['board']),
-    list() {
-      return this.board.columns;
+    name: 'Drello',
+    components: {
+        ColumnBoard
+    },
+    computed: {
+        ...mapState(['board']),
+        list() {
+            return this.board.columns;
+        }
     }
-  }
 }
 </script>
 
 <style lang="scss">
   header {
-    padding: 2em;
+    padding: 1em 2em;
     margin-bottom: 30px;
-    color: $light-color;
-    background-color: $secondary-color;
-    border-bottom: 2px solid rgb(0, 255, 195);
+    color: $dark-color;
+    background-color: $primary-color;
+    border-bottom: 2px solid $secondary-color;
   }
 
   .list-columns {

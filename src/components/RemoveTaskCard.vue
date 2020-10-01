@@ -1,10 +1,10 @@
 <template>
-    <div class="new-task-card">
-        <div class="new-task-card--content">
+    <div class="remove-task-card">
+        <div class="remove-task-card--content">
            <h2>Are you sure?</h2>
         </div>
-        <div class="new-task-card--buttons">
-            <a @click.prevent="closePopup()" href="#">Cancel</a>
+        <div class="remove-task-card--buttons">
+            <a  @click.prevent="closePopup()" href="#">Cancel</a>
             <a @click.prevent="removeTask()" href="#">Yes</a>
         </div>
     </div>
@@ -12,33 +12,37 @@
 
 <script>
 export default {
-    inject: ['tasks'],
-    data() {
-        return {
-            name: '',
-            description: ''
-        }
-    },
+    name: 'RemoveTask',
+    inject: ['task','indexColumn'],
     methods: {
         removeTask() {
             this.$store.commit('removeTask',{
-                tasks: this.tasks,
-                indexTask: 1,
+                tasks: this.getTasks,
+                indexTask: this.getIndexTask
             });
+            this.closePopup();
         },
         closePopup() {
             this.$emit('closePopup');
+        }
+    },
+    computed: {
+        getIndexTask() {
+            return this.getTasks.findIndex(task => task.id === this.task.id);
+        },
+        getTasks() {
+            return this.$store.state.board.columns[this.indexColumn].tasks;
         }
     }
 }
 </script>
 
 <style lang="scss">
-    .new-task-card {
+    .remove-task-card {
         padding: 40px;
     }
 
-    .new-task-card--field {
+    .remove-task-card--field {
         display: flex;
         flex-direction: column;
         margin-bottom: 15px;
@@ -50,13 +54,19 @@ export default {
         }
     }
 
-    .new-task-card--buttons {
+    .remove-task-card--buttons {
         display: flex;
         justify-content: space-between;
 
         a {
+            font-size: 16px;
+            font-weight: bold;
             color: $dark-color;
             text-decoration: none;
+
+            &:hover {
+                text-decoration: underline;
+            }
         }
     }
 </style>

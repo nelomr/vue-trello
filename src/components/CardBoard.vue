@@ -4,6 +4,7 @@
             <input
                 @input="changeTitle()"
                 type="text"
+                maxlength="40"
                 v-model="title"
             >
         </div>
@@ -17,7 +18,11 @@
                     type="text"
                 />
                 <div class="card-board--buttons">
-                    <a href="#" @click.prevent="openPopup()"><font-awesome-icon icon="trash-alt" size="1x" /></a>
+                    <a href="#"
+                        @click.prevent="openPopup()"
+                    >
+                        <font-awesome-icon icon="trash-alt" size="1x" />
+                    </a>
                 </div>
             </div>
         </div>
@@ -42,6 +47,11 @@ export default {
             type: Object,
             default: () => ({})
         }
+    },
+    provide() {
+        return {
+            task: this.task
+        };
     },
     data() {
         return {
@@ -89,6 +99,11 @@ export default {
 
         &:last-child {
             margin-bottom: 0;
+        }
+
+        textarea {
+            min-height: 30px;
+            padding-right: 20px;
         }
     }
 

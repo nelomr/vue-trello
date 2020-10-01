@@ -54,7 +54,7 @@ export default new Vuex.Store({
             );
         },
         removeTask(state, {tasks, indexTask}) {
-            tasks.slice(indexTask, 1);
+            tasks.splice(indexTask, 1);
         },
         updateColumnsData(state, {tasks, indexColumn}) {
             state.board.columns[indexColumn].tasks = tasks;

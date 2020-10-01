@@ -6,14 +6,14 @@ import { faEdit, faTrashAlt, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 library.add(
-  faEdit,
-  faTrashAlt,
-  faPlus
+    faEdit,
+    faTrashAlt,
+    faPlus
 )
 Vue.config.productionTip = false
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 new Vue({
-  store,
-  render: h => h(App),
+    store,
+    render: h => h(App),
 }).$mount('#app')
