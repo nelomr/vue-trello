@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`CardBoard renders the component 1`] = `
+<li class="card-board">
+  <div class="card-board--title"><input type="text" maxlength="40"></div>
+  <div class="card-board--content">
+    <div class="card-board--description"><textarea resize="false" placeholder="Add some description..." type="text"></textarea>
+      <div class="card-board--buttons"><a href="#">
+          <font-awesome-icon-stub icon="trash-alt" size="1x"></font-awesome-icon-stub>
+        </a></div>
+    </div>
+  </div>
+  <popupelement-stub></popupelement-stub>
+</li>
+`;
