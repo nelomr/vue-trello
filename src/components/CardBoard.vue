@@ -34,7 +34,6 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
 import PopupElement from './PopupElement';
 
 export default {
@@ -59,12 +58,6 @@ export default {
             enableEdit: false,
             title: this.task.name,
             description: this.task.description
-        }
-    },
-    computed: {
-        ...mapGetters(['getTask']),
-        getCurrentTask() {
-            return this.getTask(this.task.id);
         }
     },
     methods: {

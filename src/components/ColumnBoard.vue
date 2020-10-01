@@ -99,9 +99,11 @@ export default {
 <style lang="scss">
     .column {
         flex: 1 1 100%;
+        margin-bottom: 20px;
 
         @include breakpoint($min-tablet) {
             flex: 0 1 calc(50% - 15px);
+            margin-bottom: 0;
         }
 
         .sortable-chosen {
