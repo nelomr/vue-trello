@@ -1,6 +1,8 @@
 # Drello
 A simple trello with vue, you can add delete and drop de task, i've added persistence in order to mantain de actions while you don't close the tab.
 
+Demo [https://nelomr.github.io/vue-trello/](https://nelomr.github.io/vue-trello/)
+
 ## Project setup
 ```
 yarn install
